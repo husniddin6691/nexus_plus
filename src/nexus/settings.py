@@ -40,7 +40,12 @@ INSTALLED_APPS = [
     'main',
     'category',
     'user',
-    'product'
+    'product',
+    'blog',
+    'contact',
+    'about',
+    'region',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
@@ -65,7 +70,9 @@ TEMPLATES = [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
+                'django.contrib.messages.context_processors.messages'
+                
+
             ],
         },
     },
@@ -74,15 +81,16 @@ TEMPLATES = [
 WSGI_APPLICATION = 'nexus.wsgi.application'
 
 
+
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "nexus_db",
-        "USER": "nexus_user",
-        "PASSWORD": "nexus_root",
+        "NAME": "nexus_plus",
+        "USER": "postgres",
+        "PASSWORD": "12345",
         "HOST": "127.0.0.1",
         "PORT": "5432",
     }

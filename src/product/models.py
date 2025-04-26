@@ -1,6 +1,10 @@
 from django.db import models
-from category.models import Region, Category, Brand
+from category.models import Category, Region, Brand
+# from region.models import Region 
 from user.models import Profile
+from django.utils.text import slugify
+ 
+
 
 
 class Product(models.Model):
@@ -15,6 +19,8 @@ class Product(models.Model):
         (2, "INACTIVE"),
         (3, "SOLD")
     ]
+    
+
     title = models.CharField(max_length=200, null=False, blank=False)
     description = models.TextField(null=False, blank=False)
     location = models.ForeignKey(Region, on_delete=models.SET_NULL, null=True, blank=False)
@@ -25,6 +31,7 @@ class Product(models.Model):
     status = models.SmallIntegerField(choices=status_types, default=1)
     price = models.IntegerField(null=True, blank=True)
     price_on_call = models.BooleanField(default=False)
+    slug = models.SlugField(unique=True, blank=True, null=True)
 
     created_at = models.DateTimeField(auto_now=True, editable=False)
     updated_at = models.DateTimeField(auto_now_add=True)
@@ -42,5 +49,9 @@ class ProductView(models.Model):
 
 class ProductImage(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='images')
-    image = models.ImageField(upload_to='')
+    image = models.ImageField(upload_to='products/', blank=True, null=True)
+
     is_main = models.BooleanField(default=False)
+
+
+ 

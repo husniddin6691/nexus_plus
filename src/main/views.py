@@ -1,18 +1,24 @@
 from django.db.models import Prefetch
 from django.shortcuts import render
-from category.models import Category
+from category.models import Category, Region
 from product.models import Product, ProductImage
 
+
 def main(request):
-    categories = Category.objects.filter(is_main=True)
+    categories = Category.objects.all()
     products = Product.objects.prefetch_related(
         Prefetch('images', queryset=ProductImage.objects.filter(is_main=True), to_attr='main_images'))
-    print(products)
+    print(products),
+    regions = Region.objects.all()
     ctx = {
         "categories": categories,
         "products": products,
-        "a" : 1234567890
+        "regions": regions
     }
     return render(request, 'index.html', ctx)
+
+def services_page(request):
+    ctx = {}
+    return render(request, 'services.html', ctx)
 
 
